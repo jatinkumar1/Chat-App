@@ -19,12 +19,6 @@ dotenv.config();
 
 app.use(express.json()); //to parse incoming request with json payloads
 app.use(cookieParser());
-
-app.get("/",(req,res)=>{
-    res.send("Hello World 3");
-})
-
-
 app.use("/api/auth",authRoutes)
 app.use("/api/messages",messageRoute)
 app.use("/api/users",usersRoute)

@@ -19,24 +19,3 @@ const Home = () => {
 }
 
 export default Home
-
-{/* <div className='pt-5'> */}
-
-{/* home */}
-{/* <div className='flex ml-20'>
-  <div>
-
-    {/* sidebar */}
-    {/* chats
-    <div>searchbar</div>
-    <div> all chats username</div> */}
-    {/* <Sidebar/>
-  </div>
-  <div>
-  <MessageContainer/>
-  {/* chatdisplay */}
-  {/* </div>
-</div> */}
-
-
-// {/* </div> */} */} */}
