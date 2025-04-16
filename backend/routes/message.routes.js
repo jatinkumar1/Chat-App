@@ -1,7 +1,7 @@
 const express = require("express");
-const sendMessages = require("../controllers/message.controller.js");
+const {sendMessages,getMessages} = require("../controllers/message.controller.js");
 const protectRoute = require("../middleware/protectRoute.js");
-const getMessages = require("../controllers/message.controller.js");
+// const getMessages = require("../controllers/message.controller.js");
 const router = express.Router();
 
 // protect rout is authorization process jo user check krega

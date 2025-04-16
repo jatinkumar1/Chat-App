@@ -1,12 +1,13 @@
 const Conversation = require("../models/conversations.model");
 const Message = require("../models/message.model");
+const { getReceiverSocketId, io } = require("../socket/socket");
 
 const sendMessages = async(req,res)=>{
-    // console.log("sendMessage route",req.params.id)
     try {
         const {message} = req.body;
         const {id:receiverId} = req.params;
         const senderId = req.user._id;
+        // console.log(message);
 
         let conversation = await Conversation.findOne({
             participants:{$all:[senderId,receiverId]},
@@ -33,9 +34,21 @@ const sendMessages = async(req,res)=>{
         // await newMessage.save();
 
         // ye kmm time lega parallely chlega
-        await Promise.all(conversation.save(),newMessage.save());
+        await Promise.all([conversation.save(),newMessage.save()]);
+
+
+        // socketfunctionality
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+
+            // send events to specific clients
+            io.to(receiverSocketId).emit("newMessage",newMessage);
+
+        }
+
 
         res.status(201).json(newMessage);
+        // console.log(newMessage);
 
     } catch (error) {
         console.log("Error in sending message",error.message)
@@ -53,10 +66,10 @@ const getMessages = async(req,res) => {
         }).populate("messages"); // ye direct saare message de rha h 
 
         if(!conversation){
-        res.status(400).json({error:"No message there"});
+        return res.status(400).json({error:"No message there"});
 
         }
-
+        // console.log("try ",conversation)
         res.status(201).json(conversation.messages);
 
     } catch (error) {
@@ -66,8 +79,7 @@ const getMessages = async(req,res) => {
 }
 
 
-module.exports = sendMessages;
-module.exports = getMessages;
+module.exports = { sendMessages, getMessages }
 
 // 67f1725c9f7d3063e4e9cbec
 // 67f17295569746caf83a9980

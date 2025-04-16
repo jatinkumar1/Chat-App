@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "build" : "npm install && npm install --prefix frontenc && npm run build --prefix frontenc"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +19,8 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "socket-io": "^1.0.0",
+    "socket.io": "^4.8.1"
   }
 }
