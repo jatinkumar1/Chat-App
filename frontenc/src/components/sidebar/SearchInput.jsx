@@ -17,7 +17,7 @@ function SearchInput() {
     //   })}
 
     // const filteredUsers = conversations.filter((user)=>user.fullName.toLowerCase().includes(search.toLowerCase()));
-
+    const [noUserFound,setNoUserFound] = useState(false);
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Search:', search);
@@ -30,21 +30,24 @@ function SearchInput() {
             setSelectedConversation(convo);
             setSearch('');
         }else {
-            alert("no error");
+            setNoUserFound(true);
+            setTimeout(() => {
+                setNoUserFound(false);
+            }, 2000);
         }
     };
     
 
     return (
         <>
-        <form onSubmit={handleSubmit} className="flex max-w-sm mx-auto items-center">
+        <form onSubmit={handleSubmit} className="flex max-w-sm mx-auto items-center pt-12">
             <div className="relative w-full">
                 {/* <LogoutButton/> */}
                 <input
                     type="text"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search branch name..."
+                    placeholder="Search User Name.."
                     className="w-full pl-4 p-2.5 text-sm rounded-lg border border-gray-300 
                          bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500 
                          dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
@@ -58,6 +61,11 @@ function SearchInput() {
                 <CiSearch size={18} color='black'/>
             </button>
         </form>
+            <div>
+            {noUserFound && (
+                <p className='text-red-500 text-center text-sm'>no user found</p>
+            )}
+            </div>
         </>
 
     );

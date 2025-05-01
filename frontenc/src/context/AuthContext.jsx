@@ -9,5 +9,11 @@ export const useAuthContext = () => {
 export const AuthContextProvider = ({children}) => {
     const [authUser , setAuthUser] = useState(JSON.parse(localStorage.getItem("chat-user")) || null);
 
-    return <AuthContext.Provider value={{authUser,setAuthUser}}>{children}</AuthContext.Provider>
+    // just for simplicity i have not created another context for shoeing chat
+    const[showChat,setShowChat] = useState(false);
+
+    // login/signup error message error
+    const[ErrorMessage,setErrorMessage] = useState('');
+
+    return <AuthContext.Provider value={{authUser,setAuthUser,showChat,setShowChat,ErrorMessage,setErrorMessage}}>{children}</AuthContext.Provider>
 }

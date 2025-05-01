@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import InputField from '../../components/InputField';
 import useLogin from '../../hooks/useLogin';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Login = () => {
 	const[username,setUsername] = useState('');
 	const[password,setPassword] = useState('');
 	const{loading,login} = useLogin();
+	const{ErrorMessage} = useAuthContext();
 	const handleSubmit = async(e) =>{
 		e.preventDefault();
 		console.log(username);
@@ -16,7 +18,12 @@ const Login = () => {
 	return (
 		<div className="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
 			<div className="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
-				<h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">Welcome Back!</h1>
+			<div>
+					<h1 className="text-2xl font-bold text-center mb-2 dark:text-gray-200">Welcome! Back</h1>
+					{ErrorMessage && (
+						<p className="text-red-500 text-center mb-2">{ErrorMessage}</p>
+					)}
+				</div>
 				<form onSubmit={handleSubmit}>
 					<InputField for="Username" type="text" placeholder="JD" value={username} onChange={(e)=>setUsername(e.target.value)}/>
 					<InputField for="Password" type="text" placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)}/>

@@ -3,7 +3,20 @@ import { useAuthContext } from '../context/AuthContext';
 
 function useLogin() {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext();
+  const { setAuthUser,setErrorMessage } = useAuthContext();
+
+
+  function handleInputErrors({ username, password }) {
+    if (!username || !password) {
+      setErrorMessage("Enter Credentials")     
+      return false;
+    }
+    if (password.length < 6) {
+      setErrorMessage("password length is less than 6")
+      return false;
+    }
+    return true;
+  }
 
   const login = async ({ username, password }) => {
     setLoading(true);
@@ -24,6 +37,7 @@ function useLogin() {
 
       const data = await res.json();
       if (data.error) {
+        setErrorMessage(data.error)
         throw new Error(data.error)
       }
 
@@ -43,13 +57,3 @@ function useLogin() {
 
 export default useLogin
 
-function handleInputErrors({ username, password }) {
-  if (!username || !password) {
-    
-    return false;
-  }
-  if (password < 6) {
-    return false;
-  }
-  return true;
-}

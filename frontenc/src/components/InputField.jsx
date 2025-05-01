@@ -3,8 +3,8 @@ import React from 'react'
 function InputField(props) {
   return (
     <div>
-        <div className="mb-2">
-            <label htmlFor={props.for} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{props.for}</label>
+        <div className="">
+            <label htmlFor={props.for} className="block text-sm font-medium text-gray-700 dark:text-gray-300">{props.for}</label>
             <input
               type={props.type}
               id={props.for}

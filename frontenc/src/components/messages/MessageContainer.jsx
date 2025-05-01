@@ -13,7 +13,7 @@ function MessageContainer() {
   },[setSelectedConversation])
 
   return (
-    <div className='flex-grow flex flex-col h-screen'>
+    <div className='flex-1 flex flex-col h-screen  pt-14'>
       
       {!selectedConversation ? (
         <NoChatSelected/>

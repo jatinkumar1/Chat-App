@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import InputField from '../../components/InputField';
 import useSignup from '../../hooks/useSignup';
+import { useAuthContext } from '../../context/AuthContext';
 
 const SignUp = () => {
 	const[fullName,setFullname] = useState('');
@@ -9,6 +10,7 @@ const SignUp = () => {
 	const[password,setPassword] = useState('');
 	const[confirmPassword,setConfirmpassword] = useState('');
 	const[gender,setGender] = useState('');
+	const {ErrorMessage} = useAuthContext();
 
 	const {loading,signup} = useSignup();
 	const handleSubmit =async (e) =>{
@@ -17,17 +19,24 @@ const SignUp = () => {
 		await signup({fullName,username,password,confirmPassword,gender});
 	}
 
+	console.log(ErrorMessage)
+
 	return (
 		<div className="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
 			<div className="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-lg w-full">
-				<h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">Hey! Buddy</h1>
+				<div>
+					<h1 className="text-2xl font-bold text-center mb-2 dark:text-gray-200">Hey! Buddy</h1>
+					{ErrorMessage && (
+						<p className="text-red-500 text-center mb-2">{ErrorMessage}</p>
+					)}
+				</div>
 				<form onSubmit={handleSubmit}>
 					{/*  */}
 					<InputField for="Full Name" type="text" placeholder="John Dep" value={fullName} onChange={(e)=>setFullname(e.target.value)} />
 					<InputField for="Username" type="text" placeholder="JD" value={username} onChange={(e)=>setUsername(e.target.value)}/>
-					<InputField for="Password" type="text" placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+					<InputField for="Password" type="text" placeholder="Enter your password (Lenght must be greater than 7)" value={password} onChange={(e)=>setPassword(e.target.value)}/>
 					<InputField for="Confirm Password" type="text" placeholder="Re-Enter password" value={confirmPassword} onChange={(e)=>setConfirmpassword(e.target.value)}/>
-					<InputField for="Gender" type="text" placeholder="Male/Female" value={gender} onChange={(e)=>setGender(e.target.value)}/>
+					<InputField for="Gender" type="text" placeholder="male/female" value={gender} onChange={(e)=>setGender(e.target.value.toLowerCase())}/>
 
 					<div className="flex items-center justify-end mb-4 space-x-1">
 						<div className="flex items-center">
