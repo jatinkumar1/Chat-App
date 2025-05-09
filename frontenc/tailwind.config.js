@@ -14,8 +14,5 @@ export default {
       '2xl': '1536px',
     },
   },
-  plugins: [
-    // eslint-disable-next-line no-undef
-    require('daisyui'),
-  ],
+  plugins: [require("daisyui")],
 }
