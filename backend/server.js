@@ -23,6 +23,7 @@ app.use("/api/auth",authRoutes)
 app.use("/api/messages",messageRoute)
 app.use("/api/users",usersRoute)
 
+
 app.use(express.static(path.join(__dirname,'../frontenc/dist')))
 
 app.get("/*splat",(req,res)=>{
