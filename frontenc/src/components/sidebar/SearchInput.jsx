@@ -40,7 +40,8 @@ function SearchInput() {
 
     return (
         <>
-        <form onSubmit={handleSubmit} className="flex max-w-sm mx-auto items-center pt-12">
+        <form onSubmit={handleSubmit} className="flex max-w-sm mx-auto items-center"> 
+            {/* pt-12 */}
             <div className="relative w-full">
                 {/* <LogoutButton/> */}
                 <input

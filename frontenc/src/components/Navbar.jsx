@@ -4,21 +4,21 @@ import { useAuthContext } from "../context/AuthContext";
 import LogoutButton from "./sidebar/LogoutButton";
 
 const Navbar = () => {
-  const { logout, authUser,showChat, setShowChat } = useAuthContext();
+  const { logout, authUser ,showChat} = useAuthContext();
 
   return (
     <header
-      className="bg-base-100 border-b border-base-300 fixed w-full top-0  z-40
-    backdrop-blur-lg bg-base-100/80"
+      className={`bg-base-100 border-b border-base-300 fixed w-full top-0  z-40
+    backdrop-blur-lg bg-base-100/80 ${showChat ? "hidden" : "block"} md:block`}
     >
-      <div className="container mx-auto px-4 h-14 bg-slate-500">
+      <div className="  px-4 h-14 bg-slate-500 ">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center justify-center hover:opacity-80 transition-all">
               <div className="size-6 rounded-lg bg-primary/10 flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-primary" />
               </div>
-              <h1 className="text-lg font-bold">Chatty</h1>
+              <h1 className="text-lg font-bold">Textify</h1>
             </Link>
           </div>
 
@@ -38,13 +38,7 @@ const Navbar = () => {
 
               <>
 
-                {showChat && (
-                  <div className="block lg:hidden md:hidden">
-                  <button onClick={() => setShowChat(false)} className="btn btn-sm gap-1">
-                    <MessageSquareReply className="size-5"/>
-                  </button>
-                  </div>
-                )}
+                
                 <Link to={"/profile"} className={`btn btn-sm gap-1`}>
                   <User className="size-5" />
                   <span className="hidden sm:inline">Profile</span>
